@@ -12,12 +12,13 @@ const Login = () => {
         setPassword(e.target.value)
     }
     const onClickLogin = () => {
-        axios.post('http://localhost:3001/user_inform/onLogin', null, {
+        axios.post('http://localhost:8000/user_inform/onLogin',{
+        
                 body:{user_email : email,
                 user_pw: password
-            }
-        })
-        .then(alert('보내기성공'))
+                }
+    })
+        .then((res)=>{console.log(res)})
         .catch()
     }
     

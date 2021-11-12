@@ -7,5 +7,5 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(cors());
 app.use('/user_inform', user_inform);
-const port = 3001;
+const port = process.env.port || 8000;
 app.listen(port, () => console.log(`Node.js Server is running on port ${port}...`));
