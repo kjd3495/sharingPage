@@ -1,0 +1,22 @@
+div{
+    box-sizing: border-box;
+}
+input{
+    box-sizing: border-box;
+}
+.top{
+    width: 100%;
+}
+.top_content{
+    display: flex;
+    width: 300px;
+    justify-content: space-around;
+    align-items: center;
+}
+.logo{
+    display: flex;
+}
+ img {
+   object-fit: contain;
+   margin-right: 20px;
+}
