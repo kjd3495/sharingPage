@@ -1,12 +1,10 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
-import  search  from './Search/Search'
-import adminMain from './Admin/AdminMain'
-import write from './Post/Write'
-import userUpdate from './User/UserUpdate'
 import {logout, loading} from '../features/userSlice'
 import {useDispatch} from 'react-redux'
 import axios from 'axios'
+import '../styles/nav.css'
+import { Settings, Edit, Person, ExitToApp} from '@material-ui/icons'
 const Nav = () => {
     const dispatch = useDispatch();
     
@@ -20,17 +18,18 @@ const Nav = () => {
  
     }
     return(
-            <div>
-            <div className="logo" ><Link to="/"><span><strong>나연테크</strong> Na Docs</span></Link></div>
-            
+            <div className='nav_content'>
+                <div className='left_content'>
+            <div className="nav_logo" ><img className="nav_img" src="img/logo.png" alt='logo'/><Link to="/"><h1>나연테크</h1></Link></div><strong className='docs'>Na DOCS</strong>
+            </div>
             <div className="nav_items">
-                <div className="nav_item" ><Link to="/adminMain">관리자</Link></div>
-                <div className="nav_item" ><Link to="/write">글쓰기</Link></div>
-                <div className="nav_item" ><Link to="/userUpdate">유저수정</Link></div>
-                <div className="nav_item"><button onClick={useLogout}>로그아웃</button></div>
+                <div className="nav_item" ><Link to="/adminMain"><Settings/></Link></div>
+                <div className="nav_item" ><Link to="/write"><Edit/></Link></div>
+                <div className="nav_item" ><Link to="/userUpdate"><Person/></Link></div>
+                <div className="nav_item"><ExitToApp onClick={useLogout}/></div>
             </div>
-            <hr/>
             </div>
+    
     )
 }
 

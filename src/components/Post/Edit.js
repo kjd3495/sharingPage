@@ -40,6 +40,8 @@ const Edit = () => {
     }, [post])
 
     const updatePost = () =>{
+        if(title==='')alert('제목을 입력해주세요')
+        else{
         axios.post('http://localhost:8000/post/update',{
             board_id: board_id,
             board_title:title,
@@ -47,7 +49,7 @@ const Edit = () => {
             tag: tag_list.join()
         }).then(res=>alert(res.data))
         .then(navigate('/post'))
-
+    }
     }
     const deletePost = async() => {
         await axios.post('http://localhost:8000/post/delete',{
@@ -119,7 +121,7 @@ const Edit = () => {
             <div className="tag">  
                     {
                         tag_list.map((tag)=>(
-                            <div key={tag}>{tag}<button onClick={()=>deleteTag(tag)}>삭제</button></div>
+                            <div key={tag} className='tag_content'>{tag}<button onClick={()=>deleteTag(tag)}>삭제</button></div>
                         ))
                     }
                     <input type="text" name="tag" placeholder="태그를 입력하세요" value={tag} onChange={(e)=>setTag(e.target.value)}/><button onClick={createTag}>등록</button>

@@ -15,7 +15,10 @@ const AdminUpdate = () => {
     const [truePassword, setTruePassword] = useState(false)
     const [passwordCheck, setPasswordCheck] = useState('')
     const [pwMessage, setPwMeassage] = useState('비밀번호가 일치하지 않습니다')
-
+    const [passNick, setPassNick] = useState(false)
+    useEffect(()=>{
+        console.log(adminAuth)
+    },[adminAuth])
     useEffect(()=>{
         const ReadUser= async ()=>{
         await axios.post('http://localhost:8000/admin/select',{
@@ -32,7 +35,6 @@ const AdminUpdate = () => {
         setName(user.UserName);
         setOrgan(user.UserOrgan);
         setAdminAuth(user.UserAdminAuth);
-
     },[user]);
 
     useEffect(()=>{
@@ -49,7 +51,9 @@ const AdminUpdate = () => {
         else{
         axios.post('http://localhost:8000/check/nickname', {
             user_nickname : nickname
-        }).then((res)=>alert(res.data))
+        }).then((res)=>{alert(res.data)
+            if(res.data==='사용 가능한 닉네임 입니다.')setPassNick(true)
+                else setPassNick(false)})
         .catch()
     }}
     const isPassword = (asValue)=>{
@@ -64,8 +68,9 @@ const AdminUpdate = () => {
         else if(organ ==='')alert('조직을 입력해주세요')
         else if(name ==='')alert('이름을 입력해주세요')
         else if(truePassword===false)alert('비밀번호는 8 ~ 10자 영문, 숫자 조합으로 해주세요')
+        else if(user.UserNickName!==nickname&&passNick===false)alert('닉네임 중복을 확인해주세요')
         else {axios.post('http://localhost:8000/admin/update',{
-                user_email : user.user_email,
+                user_email : selecteduser.user_email,
                 user_nickname : nickname,
                 user_pw: password,
                 user_name:name,
@@ -85,17 +90,18 @@ const AdminUpdate = () => {
                 </div>
             <div className="adUpdate_items">
             <div className="adUpdate_item">
-                <select name="adminAuth" defaultValue={0}
+                <strong>권한: </strong>
+                <select name="adminAuth" defaultValue={selecteduser.user_adminAuth}
                     onChange={(e)=>setAdminAuth(e.target.value)}>
-                    <option value={1}>관리자</option>
                     <option value={0}>일반사용자</option>
+                    <option value={1}>관리자</option>
                     </select></div>
             <div className="adUpdate_item"><strong>이메일 : </strong>{selecteduser.user_email}</div>
-                <div className="adUpdate_item"><input type="password" name="user_pw" id="password" placeholder="비밀번호를 입력해 주세요." value={password} onChange={(e)=>{setPassword(e.target.value)}}/></div>
-                <div className="adUpdate_item"><input type="password" id="passwordCheck" placeholder="비밀번호를 다시 입력해 주세요." value={passwordCheck} onChange={(e)=>{setPasswordCheck(e.target.value)}}/><span style={pwMessage==='비밀번호가 일치합니다'?{color:'green'}:{color:'red'}}>{pwMessage}</span></div>
-                <div className="adUpdate_item"><input type="name" name="user_name"id="name" placeholder="이름을 입력해 주세요." value={name} onChange={(e)=>{setName(e.target.value)}}/></div>
-                <div className="adUpdate_item"><input type="organ"name="user_organ" id="organ" placeholder="조직을 입력해 주세요." value={organ} onChange={(e)=>{setOrgan(e.target.value)}}/></div>
-                <div className="adUpdate_item"><input type="nickname"name="user_nickname" id="nickname" placeholder="닉네임을 입력해 주세요." value={nickname} onChange={(e)=>{setNickname(e.target.value)}}/></div><button type="submit" onClick={nicknameCheck} className="nicknameCheck_btn">중복확인</button>
+                <div className="adUpdate_item"><strong>비밀번호</strong><br/><input type="password" name="user_pw" id="password" placeholder="비밀번호를 입력해 주세요." value={password} onChange={(e)=>{setPassword(e.target.value)}}/></div>
+                <div className="adUpdate_item"><strong>비밀번호확인</strong><br/><input type="password" id="passwordCheck" placeholder="비밀번호를 다시 입력해 주세요." value={passwordCheck} onChange={(e)=>{setPasswordCheck(e.target.value)}}/><span style={pwMessage==='비밀번호가 일치합니다'?{color:'green'}:{color:'red'}}>{pwMessage}</span></div>
+                <div className="adUpdate_item"><strong>이름</strong><br/><input type="name" name="user_name"id="name" placeholder="이름을 입력해 주세요." value={name} onChange={(e)=>{setName(e.target.value)}}/></div>
+                <div className="adUpdate_item"><strong>조직</strong><br/><input type="organ"name="user_organ" id="organ" placeholder="조직을 입력해 주세요." value={organ} onChange={(e)=>{setOrgan(e.target.value)}}/></div>
+                <div className="adUpdate_item"><strong>닉네임</strong><br/><input type="nickname"name="user_nickname" id="nickname" placeholder="닉네임을 입력해 주세요." value={nickname} onChange={(e)=>{setNickname(e.target.value); setPassNick(false)}}/></div><button type="submit" onClick={selecteduser.user_nickname===nickname ?()=>alert('현재 닉네임입니다'):nicknameCheck} className="nicknameCheck_btn">중복확인</button>
             </div>
         </div>
     )

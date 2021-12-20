@@ -35,6 +35,8 @@ const Write = () => {
     },[])
 
     const onWrite = ()=>{
+        if(title==='')alert('제목을 입력해주세요')
+        else{
         axios.post('http://localhost:8000/post/write', {
             board_id:boardId,
             board_title: title,
@@ -45,7 +47,7 @@ const Write = () => {
         .then(setTagList([]))
         .then(dispatch(readPost(boardId)))
         .then(navigate('/post'))
-
+    }
     }
     const createTag = ()=>{
         if(tag!==''){
@@ -111,7 +113,7 @@ const Write = () => {
                 <div className="tag_arr">
                     {
                         tagList.map((tag)=>(
-                            <div key={tag}>{tag}<button onClick={()=>deleteTag(tag)}>삭제</button></div>
+                            <div key={tag} className='tag_content'>{tag}<button onClick={()=>deleteTag(tag)}>삭제</button></div>
                         ))
                     }
                 </div>

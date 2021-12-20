@@ -51,7 +51,9 @@ const Login = () => {
         </div>
         <hr/>
         <div className="content">
-            <h1>NA DOCS</h1>
+            <div className='img_div'>
+            <img className='nadocs' src="img/NaDocs.png" alt="nadocs" width={800}/>
+            </div>
             <div className="login">
                 <div className='strong_login'><strong>Login</strong></div>
                 <div className="login_inputFields">

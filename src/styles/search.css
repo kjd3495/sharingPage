@@ -1,0 +1,39 @@
+.search_rap h1{
+    margin-bottom: 30px;
+    font-size: 50px;
+}
+.search_rap{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 100px;
+}
+.input_search {
+    width: 400px;
+    border: none;
+}
+.search{
+    border:0.5px solid gray;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+}
+.search > input:focus{
+    outline: none;
+}
+.search > select{
+    border:none;
+}
+.search > select:focus{
+    outline: none;
+}
+.MuiSvgIcon-root{
+   width: 2em !important;
+   height: 2em!important;
+   cursor: pointer;
+}
+
+.MuiSvgIcon-root:hover{
+    transform: scale(1.1);
+}

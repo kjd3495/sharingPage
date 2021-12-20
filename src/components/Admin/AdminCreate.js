@@ -90,8 +90,8 @@ const AdminCreate = () => {
                 <div className="adminCreate_inputField">
                     <select name="adminAuth" defaultValue={0}
                     onChange={(e)=>setAdminAuth(e.target.value)}>
-                    <option value={1}>관리자</option>
                     <option value={0}>일반사용자</option>
+                    <option value={1}>관리자</option>
                     </select></div>
                 <div className="adminCreate_inputField"><input type="email" name="user_email" id="email" placeholder="이메일을 입력해 주세요" value={email} onChange={(e)=>{setEmail(e.target.value)}}/></div><button type="submit" onClick={emailCheck} className="emailCheck_btn">중복확인</button>
                 <div className="adminCreate_inputField"><input type="password" name="user_pw" id="password" placeholder="비밀번호를 입력해 주세요." value={password} onChange={(e)=>{setPassword(e.target.value)}}/></div>

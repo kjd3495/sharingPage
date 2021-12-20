@@ -4,7 +4,7 @@ import { selectPost } from '../../features/postSlice';
 import {useDispatch, useSelector} from 'react-redux'
 import axios from 'axios';
 import { selectUser } from '../../features/userSlice';
-
+import '../../styles/post.css'
 
 
 const Post = () => {
@@ -54,11 +54,17 @@ const goList = ()=>{
     navigate('/result')
     
 }
+const commentDelete = () =>{
+    axios.post('http://localhost:8000/comment/delete')
+    .then(res=>alert(res.data))
+}
         return (
         <div className="posts">
             <div className="post_top">
                 <button className="btn" onClick={goList}>목록</button>
-                <button className="btn" onClick={()=>navigate('/edit')}>편집하기</button>
+                <button className="btn" onClick={()=>{
+                    //post.UserNickName===user.user_nickname||user.user_adminAuth===1?navigate('/edit'):alert('권한이 없습니다!')}}>
+                navigate('/edit')}}>편집하기</button>
             <div className="title">제목: {post.BoardTitle}</div>
             <div className="create_date">등록일: {post.CreateDate}</div>
             <div className="update_date">수정일: {post.UpdateDate?post.UpdateDate:'----'}</div>
@@ -69,7 +75,7 @@ const goList = ()=>{
             <div className="tag"><span>태그</span>
             {
                 tag_list.map((tag)=>(
-                    <div>{tag}</div>
+                    <div className='tag_content'>{tag}</div>
                 ))
             }
             </div>
@@ -78,9 +84,10 @@ const goList = ()=>{
                 {
                 commentList.map((comments)=>(
                     <div key={comments.CommentId}>
-                    <div>{comments.CommentContent}</div>
+                    <div>{comments.CommentContent} <button style={user.user_adminAuth===1||comments.UserNickName===user.user_nickname?{display:"inline"}:{display:"none"}}onClick={commentDelete}>삭제</button></div>
                     <div>{comments.UserNickName}</div>
                     <div>{comments.CreateDate}</div>
+                    
                     </div>
                 ))
             }

@@ -16,7 +16,7 @@ input{
 .logo{
     display: flex;
 }
- img {
+ .top_content img {
    object-fit: contain;
    margin-right: 20px;
 }
@@ -26,7 +26,9 @@ input{
    justify-content: center;
    align-items: center;
 }
+
 .login{
+    margin-top: -30px;
     width: 420px;
     height:320px;
     border:0.5px solid black;

@@ -4,7 +4,9 @@ import { useNavigate } from 'react-router'
 import {useDispatch, useSelector} from 'react-redux'
 import { useKeyword } from '../../features/postSlice'
 import { usingTag} from '../../features/tagSlice'
-const Search = () => {
+import '../../styles/search.css'
+import { Search} from '@material-ui/icons'
+const SearchPage = () => {
     const [keywords, setKeywords] = useState('')
     const navigate = useNavigate()
     const dispatch = useDispatch();
@@ -15,15 +17,19 @@ const Search = () => {
         dispatch(usingTag(useTag));
         navigate('/result');
     }
+    
     return (
-        <div>
+        <div className='search_rap'>
+          <img className='nadocs' src="img/NaDocs.png" alt="nadocs" width={800}/> 
+        <div className='search'>
             <select size="1" id="search_items" value={useTag} onChange={e=>{setUseTag(e.target.value)}}>
             <option value = 'false' >제목+내용</option>
             <option value = 'true'>태그</option>
             </select>
-            <input type="text" placeholder="검색어" onChange={(e)=>{setKeywords(e.target.value)}}/><button onClick={useSearch}>검색</button>
+            <input className="input_search"type="text" placeholder="검색어" onChange={(e)=>{setKeywords(e.target.value)}}/><Search onClick={useSearch}/>
+        </div>
         </div>
     )
 }
 
-export default Search
+export default SearchPage

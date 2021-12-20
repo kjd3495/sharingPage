@@ -34,4 +34,13 @@ router.post('/create', (req, res) => {
                 }else res.send('error');
             } )
         })
+        router.post('/delete',(req, res)=>{
+            const comment_id = req.body.comment_id;
+            const sql = 'DELETE FROM comment WHERE CommentId=?'
+            db.query(sql,[comment_id],(err, result)=>{
+                if(!err){
+                    res.send('제거완료');
+                }else res.send('error');
+            } )
+        })
 module.exports = router;

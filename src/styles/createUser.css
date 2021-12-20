@@ -16,7 +16,8 @@ input{
 .logo{
     display: flex;
 }
- img {
-   object-fit: contain;
-   margin-right: 20px;
+img {
+    object-fit: contain;
+    margin-right: 20px;
 }
+
