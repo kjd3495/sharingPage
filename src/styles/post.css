@@ -1,4 +1,11 @@
 .tag_content {
     background-color: yellow;
-    color:white;
+    color:rgb(141, 137, 137);
+}
+.posts{
+    margin: 0 auto;
+    padding: 20px;
+}
+th{
+    text-align: center;
 }

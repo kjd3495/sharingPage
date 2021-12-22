@@ -8,11 +8,10 @@ router.post('/write', (req, res) => {
     const user_nickname = req.body.user_nickname;
     const board_title = req.body.board_title;
     const board_content = req.body.board_content;
-    const createDate = new Date();
+    const createDate = req.body.date;
     const updateDate = null;
     const tag = req.body.tag
     const param = [board_id,board_title, board_content, createDate, updateDate, user_nickname, tag]
-    
             const sql = 'INSERT INTO nayuntech.board(BoardId, BoardTitle,BoardContent,CreateDate, UpdateDate, UserNickName, Tag)VALUES(?,?,?,?,?,?,?)'
             db.query(sql, param, (error, result)=>{
                 if(!error)res.send('등록완료');
@@ -24,7 +23,7 @@ router.post('/write', (req, res) => {
             const board_id = req.body.board_id
             const board_title = req.body.board_title;
             const board_content = req.body.board_content;
-            const update_date = new Date();
+            const update_date = req.body.date;
             const tag = req.body.tag;
             const param =  [board_title, board_content, update_date, tag, board_id];
             

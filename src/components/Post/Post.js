@@ -5,8 +5,9 @@ import {useDispatch, useSelector} from 'react-redux'
 import axios from 'axios';
 import { selectUser } from '../../features/userSlice';
 import '../../styles/post.css'
-
-
+import { Delete } from '@material-ui/icons';
+import 'moment/locale/ko'
+import moment from 'moment'
 const Post = () => {
     const board_id = useSelector(selectPost)
     const [post, setPost] = useState([])
@@ -17,21 +18,20 @@ const Post = () => {
     const user = useSelector(selectUser)
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    const p =document.createElement('p')
     useEffect(()=>{
         const getPost = async()=>{
-            await axios.get('http://localhost:8000/post/select?board_id='+board_id+'')
+            await axios.get('http://10.0.15.27:8000/post/select?board_id='+board_id+'')
             .then(res=> setPost(res.data[0]))
-            await axios.get('http://localhost:8000/tag/select?board_id='+board_id+'')
+            await axios.get('http://10.0.15.27:8000/tag/select?board_id='+board_id+'')
             .then(res=>setTag_list(res.data))
-            await axios.get('http://localhost:8000/comment/read?board_id='+board_id+'')
+            await axios.get('http://10.0.15.27:8000/comment/read?board_id='+board_id+'')
             .then(res=>setCommentList(res.data))
         }
         getPost();
     },[board_id, commentId])
 
     useEffect(()=>{
-        axios.get('http://localhost:8000/comment/id')
+        axios.get('http://10.0.15.27:8000/comment/id')
         .then(res=>{
             if(res.data.comment_id===null){
                 setCommentId(1)
@@ -41,11 +41,12 @@ const Post = () => {
     },[board_id])
     
 const createComment = ()=>{
-    axios.post('http://localhost:8000/comment/create',{
+    axios.post('http://10.0.15.27:8000/comment/create',{
         comment_id: commentId,
         comment_content:comment,
         board_id:board_id,
-        user_nickname: user.user_nickname
+        user_nickname: user.user_nickname,
+        date: moment().format('YYYYMMDD HH:mm:ss')
     }).then(setCommentId(commentId+1))
     .then(setComment(''))
     .then(res=>alert(res.data))
@@ -55,13 +56,17 @@ const goList = ()=>{
     
 }
 const commentDelete = () =>{
-    axios.post('http://localhost:8000/comment/delete')
+    axios.post('http://10.0.15.27:8000/comment/delete')
     .then(res=>alert(res.data))
+}
+const Enter = (e) =>{
+    
+    if(e.key==='Enter')createComment();
 }
         return (
         <div className="posts">
             <div className="post_top">
-                <button className="btn" onClick={goList}>목록</button>
+                <button style={{marginRight:"5px"}} className="btn" onClick={goList}>목록</button>
                 <button className="btn" onClick={()=>{
                     //post.UserNickName===user.user_nickname||user.user_adminAuth===1?navigate('/edit'):alert('권한이 없습니다!')}}>
                 navigate('/edit')}}>편집하기</button>
@@ -73,20 +78,22 @@ const commentDelete = () =>{
             
             <div className="content"dangerouslySetInnerHTML={ {__html: post.BoardContent} } ></div>
             <div className="tag"><span>태그</span>
-            {
-                tag_list.map((tag)=>(
-                    <div className='tag_content'>{tag}</div>
+            <div className="tag_arr">
+            {   tag_list===[]?<div>d</div>
+                :tag_list.map((tag)=>(
+                    <div style={{marginRight:"10px"}} key={tag} className='tag_content'><span style={{padding:"5px"}}>{tag}</span></div>
                 ))
             }
             </div>
+            </div>
             <div className="comments">
-                <input type="text" placeholder="댓글을 입력하세요" value={comment} onChange={(e)=>{setComment(e.target.value)}}/><button onClick={createComment}>댓글등록</button>
+                <input type="text" placeholder="댓글을 입력하세요" onKeyPress={Enter} value={comment} onChange={(e)=>{setComment(e.target.value)}}/><button onClick={createComment}>댓글등록</button>
                 {
                 commentList.map((comments)=>(
                     <div key={comments.CommentId}>
-                    <div>{comments.CommentContent} <button style={user.user_adminAuth===1||comments.UserNickName===user.user_nickname?{display:"inline"}:{display:"none"}}onClick={commentDelete}>삭제</button></div>
-                    <div>{comments.UserNickName}</div>
-                    <div>{comments.CreateDate}</div>
+                    <div style={{display:"flex", alignItems:"center"}}>{comments.CommentContent} <Delete style={user.user_adminAuth===1||comments.UserNickName===user.user_nickname?{display:"inline"}:{display:"none"}}onClick={commentDelete}/></div>
+                    <div>닉네임: {comments.UserNickName}</div>
+                    <div>등록일: {comments.CreateDate}</div>
                     
                     </div>
                 ))

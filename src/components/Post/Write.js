@@ -11,7 +11,10 @@ import "bootstrap/js/modal";
 import "bootstrap/js/dropdown";
 import "bootstrap/js/tooltip";
 import "bootstrap/dist/css/bootstrap.css";
-
+import '../../styles/write.css'
+import { Delete} from '@material-ui/icons'
+import 'moment/locale/ko'
+import moment from 'moment'
 const Write = () => {
     const [title, setTitle] = useState('')
     const [content, setContent] = useState('')
@@ -24,7 +27,7 @@ const Write = () => {
     const reader = new FileReader();
     const contentArr = [];
     useEffect(()=>{
-        axios.get('http://localhost:8000/read/boardId')
+        axios.get('http://10.0.15.27:8000/read/boardId')
         .then(res=>{
             if(res.data.max_id===null){
                 setBoardId(1)
@@ -37,12 +40,13 @@ const Write = () => {
     const onWrite = ()=>{
         if(title==='')alert('제목을 입력해주세요')
         else{
-        axios.post('http://localhost:8000/post/write', {
+        axios.post('http://10.0.15.27:8000/post/write', {
             board_id:boardId,
             board_title: title,
             board_content:document.querySelector('.note-editable').innerHTML,
             user_nickname: user.user_nickname,
-            tag: tagList.join()
+            tag: tagList.join(),
+            date:moment().format('YYYYMMDD HH:mm:ss')
         }).then(res=>alert(res.data))
         .then(setTagList([]))
         .then(dispatch(readPost(boardId)))
@@ -62,7 +66,7 @@ const Write = () => {
     }   else{
         alert('태그를 입력해주세요')
     }
-    console.log(document.querySelector('.note-editable'))
+   
     }
     const deleteTag=(tag)=>{
         setTagList(tagList => tagList.filter((a)=>a !==tag))
@@ -83,6 +87,7 @@ const Write = () => {
         
         <div className="post">
             <div className="post_top">
+                <button style={{marginRight:"5px"}} onClick={()=>navigate(-1)}>뒤로가기</button>
                 <button onClick={onWrite}>글 등록</button>
             </div>
             <div className="title">
@@ -113,7 +118,7 @@ const Write = () => {
                 <div className="tag_arr">
                     {
                         tagList.map((tag)=>(
-                            <div key={tag} className='tag_content'>{tag}<button onClick={()=>deleteTag(tag)}>삭제</button></div>
+                            <div style={{marginRight:"10px", display:"flex", alignItems:"center"}} key={tag} className='tag_content'><span style={{padding:"5px"}}>{tag}</span><Delete onClick={()=>deleteTag(tag)}/></div>
                         ))
                     }
                 </div>

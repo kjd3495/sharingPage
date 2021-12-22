@@ -27,7 +27,7 @@ const UserUpdate = () => {
     const nicknameCheck = () => {
         if(nickname==='') alert('닉네임을 입력해주세요')
         else{
-        axios.post('http://localhost:8000/check/nickname', {
+        axios.post('http://10.0.15.27:8000/check/nickname', {
             user_nickname : nickname
         }).then((res)=>{alert(res.data)
         if(res.data==='사용 가능한 닉네임 입니다.')setPassNick(true)
@@ -46,7 +46,7 @@ const UserUpdate = () => {
         else if(truePassword===false)alert('비밀번호는 8 ~ 10자 영문, 숫자 조합으로 해주세요')
         else if(pwMessage!=='비밀번호가 일치합니다')alert('비밀번호가 일치하지 않습니다')
         else if(user.user_nickname!==nickname&&passNick===false)alert('닉네임 중복을 확인해주세요')
-        else {axios.post('http://localhost:8000/user/update',{
+        else {axios.post('http://10.0.15.27:8000/user/update',{
                 user_email : user.user_email,
                 user_nickname : nickname,
                 user_pw: password,        
@@ -57,8 +57,8 @@ const UserUpdate = () => {
     return (
         <div className="user_update">
             <div className="update_items">
-                <div className="update_item">{user.user_name}</div>
                 <div className="update_item"><strong>이메일</strong><br/>{user.user_email} </div>
+                <div className="update_item"><strong>이름</strong><br/>{user.user_name}</div>
                 <div className="update_item"><strong>조직</strong><br/>{user.user_organ}</div>
                 <div className="update_item"><strong>비밀번호</strong><br/><input type="password" name="user_pw" id="password" placeholder="비밀번호를 입력해 주세요." value={password} onChange={(e)=>{setPassword(e.target.value)}}/></div>
                 <div className="update_item"><strong>비밀번호확인</strong><br/><input type="password" id="passwordCheck" placeholder="비밀번호를 다시 입력해 주세요." value={passwordCheck} onChange={(e)=>{setPasswordCheck(e.target.value)}}/><span style={pwMessage==='비밀번호가 일치합니다'?{color:'green'}:{color:'red'}}>{pwMessage}</span></div>

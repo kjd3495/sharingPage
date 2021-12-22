@@ -1,4 +1,5 @@
 const express = require('express');
+const { session } = require('passport');
 const router = express.Router();
 const db = require('../config/db');
 
@@ -23,6 +24,7 @@ router.get('/login',(req, res)=>{
         res.send(req.user);
     }else{res.send(null)}
 })
+
 router.post('/nickname',(req, res)=> {
     const sql = 'SELECT*FROM nayuntech.user WHERE UserNickName=?'
     const user_nickname = req.body.user_nickname

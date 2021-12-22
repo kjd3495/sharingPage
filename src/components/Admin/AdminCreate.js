@@ -37,7 +37,7 @@ const AdminCreate = () => {
         else if(truePassword===false)alert('비밀번호는 8 ~ 10자 영문, 숫자 조합으로 해주세요')
         //else if(passPw===false)alert('비밀번호가 일치하는지 확인해주세요')
         else{
-        axios.post('http://localhost:8000/admin/create',{
+        axios.post('http://10.0.15.27:8000/admin/create',{
                 user_email : email,
                 user_nickname : nickname,
                 user_pw: password,
@@ -63,7 +63,7 @@ const AdminCreate = () => {
             alert('이메일 형식을 지켜주세요')
         }
         else{
-        axios.post('http://localhost:8000/check/email', {
+        axios.post('http://10.0.15.27:8000/check/email', {
             user_email : email
         }).then((res)=>alert(res.data))
         .then(setPassEmail(true))
@@ -72,7 +72,7 @@ const AdminCreate = () => {
     const nicknameCheck = () => {
         if(nickname=="") alert('닉네임을 입력해주세요')
         else{
-        axios.post('http://localhost:8000/check/nickname', {
+        axios.post('http://10.0.15.27:8000/check/nickname', {
             user_nickname : nickname
         }).then((res)=>alert(res.data))
         .then(setPassNick(true))

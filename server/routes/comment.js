@@ -7,7 +7,7 @@ router.post('/create', (req, res) => {
     const user_nickname = req.body.user_nickname
     const comment_content = req.body.comment_content
     const board_id = req.body.board_id
-    const createDate = new Date()
+    const createDate = req.body.date
     const param = [comment_id, comment_content, createDate, user_nickname, board_id ]
     const sql = 'INSERT INTO comment(CommentId,CommentContent,CreateDate, UserNickName, BoardId)VALUES(?,?,?,?,?)'
             

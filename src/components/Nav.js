@@ -9,7 +9,7 @@ const Nav = () => {
     const dispatch = useDispatch();
     
     const useLogout = ()=>{
-        axios.get('http://localhost:8000/user/logout',{},
+        axios.get('http://10.0.15.27:8000/user/logout',{},
             { withCredentials : true }
         ).then(dispatch(logout()))
         .then(dispatch(loading(false)));

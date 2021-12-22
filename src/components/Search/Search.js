@@ -6,6 +6,7 @@ import { useKeyword } from '../../features/postSlice'
 import { usingTag} from '../../features/tagSlice'
 import '../../styles/search.css'
 import { Search} from '@material-ui/icons'
+
 const SearchPage = () => {
     const [keywords, setKeywords] = useState('')
     const navigate = useNavigate()
@@ -17,7 +18,10 @@ const SearchPage = () => {
         dispatch(usingTag(useTag));
         navigate('/result');
     }
-    
+    const Enter = (e) =>{
+        // eslint-disable-next-line react-hooks/rules-of-hooks
+        if(e.key==='Enter')useSearch();
+    }
     return (
         <div className='search_rap'>
           <img className='nadocs' src="img/NaDocs.png" alt="nadocs" width={800}/> 
@@ -26,7 +30,7 @@ const SearchPage = () => {
             <option value = 'false' >제목+내용</option>
             <option value = 'true'>태그</option>
             </select>
-            <input className="input_search"type="text" placeholder="검색어" onChange={(e)=>{setKeywords(e.target.value)}}/><Search onClick={useSearch}/>
+            <input className="input_search"type="text" placeholder="검색어" onChange={(e)=>{setKeywords(e.target.value)}} onKeyPress={Enter}/><Search onClick={useSearch}/>
         </div>
         </div>
     )

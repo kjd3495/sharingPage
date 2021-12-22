@@ -13,7 +13,7 @@ const AdminMain = () => {
 
     useEffect(() => {
     const fetchPosts = () => {
-        axios.get('http://localhost:8000/admin/read').then((res)=>
+        axios.get('http://10.0.15.27:8000/admin/read').then((res)=>
         setPosts(res.data))
     }
 
@@ -30,7 +30,7 @@ const AdminMain = () => {
 }
 
     const onDelete = (email) =>{
-        axios.post('http://localhost:8000/admin/delete',{
+        axios.post('http://10.0.15.27:8000/admin/delete',{
             user_email: email
         }).then(window.location.replace('/adminMain'))
         .then(res=>alert(res.data))
@@ -52,14 +52,14 @@ const AdminMain = () => {
                 <button className='returnBtn' onClick={back}>뒤로가기</button><button className="user_create"onClick={()=>navigate('/adminCreate')}>추가하기</button>
             </div>
                 <div style={{ padding: "0 12px" }}>
-                <table className="board_list text-center">
+                <table  align='center'width='600' height="300" className="board_list text-center">
                     <colgroup>
-                        <col width="*" />
-                        <col width="*" />
-                        <col width="*" />
-                        <col width="20%" />
-                        <col width="*" />
-                        <col width="*" />
+                        <col width="50" />
+                        <col width="30" />
+                        <col width="100" />
+                        <col width="200" />
+                        <col width="200" />
+                        <col width="20" />
                     </colgroup>
                     <thead>
                     <tr>

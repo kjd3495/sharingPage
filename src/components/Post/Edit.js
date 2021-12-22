@@ -10,6 +10,9 @@ import "bootstrap/js/modal";
 import "bootstrap/js/dropdown";
 import "bootstrap/js/tooltip";
 import "bootstrap/dist/css/bootstrap.css";
+import { Delete} from '@material-ui/icons'
+import moment from 'moment'
+import 'moment/locale/ko'
 const Edit = () => {
     const board_id = useSelector(selectPost)
     const [post, setPost]=useState([])
@@ -23,11 +26,11 @@ const Edit = () => {
     const reader = new FileReader();
     useEffect(()=>{
         const getPost= async()=>{
-            await axios.get('http://localhost:8000/post/select?board_id='+board_id+'')
+            await axios.get('http://10.0.15.27:8000/post/select?board_id='+board_id+'')
             .then(res=> setPost(res.data[0]))
-            await axios.get('http://localhost:8000/tag/select?board_id='+board_id+'')
+            await axios.get('http://10.0.15.27:8000/tag/select?board_id='+board_id+'')
             .then(res=>setTag_list(res.data))
-            await axios.get('http://localhost:8000/comment/read?board_id='+board_id+'')
+            await axios.get('http://10.0.15.27:8000/read?board_id='+board_id+'')
             .then(res=>setCommentList(res.data))
         }
         getPost()
@@ -42,17 +45,18 @@ const Edit = () => {
     const updatePost = () =>{
         if(title==='')alert('제목을 입력해주세요')
         else{
-        axios.post('http://localhost:8000/post/update',{
+        axios.post('http://10.0.15.27:8000/post/update',{
             board_id: board_id,
             board_title:title,
             board_content:document.querySelector('.note-editable').innerHTML,
-            tag: tag_list.join()
+            tag: tag_list.join(),
+            date: moment().format('YYYYMMDD HH:mm:ss')
         }).then(res=>alert(res.data))
         .then(navigate('/post'))
     }
     }
     const deletePost = async() => {
-        await axios.post('http://localhost:8000/post/delete',{
+        await axios.post('http://10.0.15.27:8000/post/delete',{
             board_id : board_id
         }).then(res=>alert(res.data))
         navigate('/result')
@@ -89,7 +93,7 @@ const Edit = () => {
     return (
         <div className="posts">
             <div className="post_top">
-                <button className="btn">뒤로가기</button>
+                <button className="btn" style={{marginRight:"5px"}} onClick={()=>navigate(-1)}>뒤로가기</button>
                 <button className="btn" onClick={updatePost}>저장하기</button>
                 <button className="btn" onClick={deletePost}>삭제하기</button>
             <div className="title">제목: <input type="text" placeholder="제목" name="title" value={title} onChange={(e)=>setTitle(e.target.value)}/></div>
@@ -118,12 +122,14 @@ const Edit = () => {
                 onImageUpload={onImageUpload}
                 value={content}
                 /></div>
-            <div className="tag">  
+            <div className="tag">
+            <div className="tag_arr">  
                     {
                         tag_list.map((tag)=>(
-                            <div key={tag} className='tag_content'>{tag}<button onClick={()=>deleteTag(tag)}>삭제</button></div>
+                            <div style={{marginRight:"10px", display:"flex", alignItems:"center"}} key={tag} className='tag_content'><span style={{padding:"5px"}}>{tag}</span><Delete onClick={()=>deleteTag(tag)}/></div>
                         ))
                     }
+                    </div>
                     <input type="text" name="tag" placeholder="태그를 입력하세요" value={tag} onChange={(e)=>setTag(e.target.value)}/><button onClick={createTag}>등록</button>
                     </div>
         </div>

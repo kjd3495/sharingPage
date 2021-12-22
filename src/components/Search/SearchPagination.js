@@ -9,8 +9,8 @@ for(let i = 1; i <= Math.ceil(totalPosts / postsPerPage); i++) {
 }
 
     return (
-        <nav>
-            <ul className="pagination justify-content-center">
+        <nav style={{display:"flex", justifyContent:"center"}}>
+            <ul className="pagination justify-content-center" style={{textAligin:"center"}}>
                 {pageNumbers.map(number => (
                     <li key={number} className="page-item">
                         <span onClick={() => paginate(number)} className="page-link" style={currentPage == number ? {color: '#17a2b8'} : null}>

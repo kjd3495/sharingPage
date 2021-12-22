@@ -15,7 +15,7 @@ function App() {
   const dispatch = useDispatch();
   const loading_state = useSelector(selectLoading);
   useEffect(()=> {
-      axios.get('http://localhost:8000/check/login', {}, {withCredentials: true})
+      axios.get('http://10.0.15.27:8000/check/login', {}, {withCredentials: true})
       .then(res=>{
         if(res.data){dispatch(login({
         user_email: res.data.UserEmail,

@@ -18,6 +18,9 @@
     border-radius: 10px;
     display: flex;
     align-items: center;
+    width: 518px;
+    height: 31.6px;
+    
 }
 .search > input:focus{
     outline: none;

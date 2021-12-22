@@ -15,7 +15,7 @@ const Login = () => {
     const navigate = useNavigate()
 
     const onClickLogin = () => {
-        axios.post('http://localhost:8000/user/login',{
+        axios.post('http://10.0.15.27:8000/user/login',{
                 user_email : email,
                 user_pw: password
                 
@@ -42,6 +42,9 @@ const Login = () => {
         // eslint-disable-next-line react-hooks/rules-of-hooks
         dispatch(useCreate(true))
     }
+    const Enter = (e) =>{
+        if(e.key==='Enter')onClickLogin();
+    }
     return (
         <div>
         <div className='top'>
@@ -58,7 +61,7 @@ const Login = () => {
                 <div className='strong_login'><strong>Login</strong></div>
                 <div className="login_inputFields">
                 <div className="login_inputField"><input type="email" id="email" placeholder="이메일을 입력해 주세요" value={email} onChange={(e)=>{setEmail(e.target.value)}}/></div>
-                <div className="login_inputField"><input type="password" id="password" placeholder="비밀번호를 입력해 주세요." value={password} onChange={(e)=>{setPassword(e.target.value)}}/></div>
+                <div className="login_inputField"><input type="password" id="password" placeholder="비밀번호를 입력해 주세요." value={password} onChange={(e)=>{setPassword(e.target.value)}} onKeyPress={Enter}/></div>
                 </div>
                 <div className="login_footer">
                     <button type="submit" onClick={onClickLogin} className="login_btn">로그인</button>
