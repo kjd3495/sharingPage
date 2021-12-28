@@ -23,7 +23,8 @@ const Post = () => {
             await axios.get('http://10.0.15.27:8000/post/select?board_id='+board_id+'')
             .then(res=> setPost(res.data[0]))
             await axios.get('http://10.0.15.27:8000/tag/select?board_id='+board_id+'')
-            .then(res=>setTag_list(res.data))
+            .then(res=>{if(res.data==='')setTag_list([])
+                        else setTag_list(res.data)})
             await axios.get('http://10.0.15.27:8000/comment/read?board_id='+board_id+'')
             .then(res=>setCommentList(res.data))
         }
@@ -77,16 +78,18 @@ const Enter = (e) =>{
             </div>
             
             <div className="content"dangerouslySetInnerHTML={ {__html: post.BoardContent} } ></div>
-            <div className="tag"><span>태그</span>
+            <div className="tag"><strong>태그</strong>
             <div className="tag_arr">
-            {   tag_list===[]?<div>d</div>
+            {   tag_list===[]?<div></div>
                 :tag_list.map((tag)=>(
                     <div style={{marginRight:"10px"}} key={tag} className='tag_content'><span style={{padding:"5px"}}>{tag}</span></div>
                 ))
             }
             </div>
+            <br/>
             </div>
             <div className="comments">
+                <strong>댓글</strong><br/>
                 <input type="text" placeholder="댓글을 입력하세요" onKeyPress={Enter} value={comment} onChange={(e)=>{setComment(e.target.value)}}/><button onClick={createComment}>댓글등록</button>
                 {
                 commentList.map((comments)=>(

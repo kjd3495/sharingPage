@@ -29,8 +29,9 @@ const Edit = () => {
             await axios.get('http://10.0.15.27:8000/post/select?board_id='+board_id+'')
             .then(res=> setPost(res.data[0]))
             await axios.get('http://10.0.15.27:8000/tag/select?board_id='+board_id+'')
-            .then(res=>setTag_list(res.data))
-            await axios.get('http://10.0.15.27:8000/read?board_id='+board_id+'')
+            .then(res=>{if(res.data==='')setTag_list([])
+            else setTag_list(res.data)})
+            await axios.get('http://10.0.15.27:8000/comment/read?board_id='+board_id+'')
             .then(res=>setCommentList(res.data))
         }
         getPost()
@@ -94,7 +95,7 @@ const Edit = () => {
         <div className="posts">
             <div className="post_top">
                 <button className="btn" style={{marginRight:"5px"}} onClick={()=>navigate(-1)}>뒤로가기</button>
-                <button className="btn" onClick={updatePost}>저장하기</button>
+                <button className="btn" style={{marginRight:"5px"}}  onClick={updatePost}>저장하기</button>
                 <button className="btn" onClick={deletePost}>삭제하기</button>
             <div className="title">제목: <input type="text" placeholder="제목" name="title" value={title} onChange={(e)=>setTitle(e.target.value)}/></div>
             <div className="create_date">등록일: {post.CreateDate}</div>

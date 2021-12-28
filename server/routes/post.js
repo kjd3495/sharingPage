@@ -10,7 +10,7 @@ router.post('/write', (req, res) => {
     const board_content = req.body.board_content;
     const createDate = req.body.date;
     const updateDate = null;
-    const tag = req.body.tag
+    const tag = req.body.tag===''?null:req.body.tag;
     const param = [board_id,board_title, board_content, createDate, updateDate, user_nickname, tag]
             const sql = 'INSERT INTO nayuntech.board(BoardId, BoardTitle,BoardContent,CreateDate, UpdateDate, UserNickName, Tag)VALUES(?,?,?,?,?,?,?)'
             db.query(sql, param, (error, result)=>{
@@ -24,10 +24,10 @@ router.post('/write', (req, res) => {
             const board_title = req.body.board_title;
             const board_content = req.body.board_content;
             const update_date = req.body.date;
-            const tag = req.body.tag;
+            const tag = req.body.tag===''?null:req.body.tag;
             const param =  [board_title, board_content, update_date, tag, board_id];
             
-          
+        
                     const sql = 'UPDATE board SET BoardTitle=?, BoardContent=?, UpdateDate=?, Tag=? WHERE BoardId=?';
                     db.query(sql, param, (error, result)=>{
                         if(!error){

@@ -38,6 +38,7 @@ const Write = () => {
     },[])
 
     const onWrite = ()=>{
+        console.log(tagList.join())
         if(title==='')alert('제목을 입력해주세요')
         else{
         axios.post('http://10.0.15.27:8000/post/write', {

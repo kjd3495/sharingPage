@@ -11,6 +11,7 @@ const db = require('../config/db');
                         let arrTag = a.Tag.split(',');
                         let newObj = {BoardId:a.BoardId, BoardTitle:a.BoardTitle, BoardContent:a.BoardContent, Tag:arrTag};
                         return newObj;
+                        
                     })
                     res.send(newResult);
                 }else res.send('error');
@@ -21,7 +22,10 @@ const db = require('../config/db');
             const sql = 'SELECT Tag FROM board WHERE BoardId=?'
             db.query(sql, [board_id],(err, result)=>{
                 if(!err){
-                    let newResult = result[0].Tag.split(',');
+                    let newResult
+                    if(result[0].Tag!==null){
+                    newResult = result[0].Tag.split(',');
+                    }else newResult= null;
                     res.send(newResult);
                 }else res.send('error');
             } )

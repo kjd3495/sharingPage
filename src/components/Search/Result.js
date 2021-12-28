@@ -81,9 +81,9 @@ const Result = () => {
             {
                 posts.length===0? <div>검색결과없음</div>:
             currentPosts.map(post => (
-                <div key={post.BoardId}>
+                <div style={{transform:"scale(0.8)", marginLeft:"0"}} key={post.BoardId}>
                 <div><span style={{fontSize:"40px", fontWeight:"50",color:"black"}}onClick={()=>selectPost(post.BoardId)}>{post.BoardTitle}</span></div>
-                <div onClick={()=>selectPost(post.BoardId)} dangerouslySetInnerHTML={ {__html: post.BoardContent.replace(/<IMG(.*?)>/gi,'')} }></div>
+                <div onClick={()=>selectPost(post.BoardId)} dangerouslySetInnerHTML={ {__html: post.BoardContent.replace(/<IMG(.*?)>/gi,'').replace(/<p(.*?)>/gi,'').slice()} }></div>
                 <div style={{display:"flex", alignItems:"center"}}>{
                 post.Tag&&post.Tag.map(a=>
                 (<div style={{marginRight:"10px", backgroundColor: "yellow",
