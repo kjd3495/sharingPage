@@ -47,7 +47,7 @@ const createComment = ()=>{
         comment_content:comment,
         board_id:board_id,
         user_nickname: user.user_nickname,
-        date: moment().format('YYYYMMDD HH:mm:ss')
+        date: moment().format('YYYY-MM-DD HH:mm:ss')
     }).then(setCommentId(commentId+1))
     .then(setComment(''))
     .then(res=>alert(res.data))

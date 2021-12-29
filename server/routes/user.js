@@ -11,7 +11,7 @@ router.post('/register', (req, res) => {
     const user_pw = req.body.user_pw
     const user_organ= req.body.user_organ
     const user_name = req.body.user_name
-    const user_date = new Date()
+    const user_date = req.body.date
     const user_adminAuth = false
     const param = [user_email, user_nickname, user_pw, user_organ, user_name,user_adminAuth,user_date]
     

@@ -52,14 +52,14 @@ const AdminMain = () => {
                 <button className='returnBtn' onClick={back}>뒤로가기</button><button className="user_create"onClick={()=>navigate('/adminCreate')}>추가하기</button>
             </div>
                 <div style={{ padding: "0 12px" }}>
-                <table  align='center'width='600' height="300" className="board_list text-center">
+                <table  align='center'width='800' height="300" className="board_list text-center">
                     <colgroup>
-                        <col width="50" />
-                        <col width="30" />
+                        <col width="100" />
+                        <col width="100" />
                         <col width="100" />
                         <col width="200" />
                         <col width="200" />
-                        <col width="20" />
+                        <col width="100" />
                     </colgroup>
                     <thead>
                     <tr>
@@ -69,29 +69,29 @@ const AdminMain = () => {
                         <th>이메일</th>
                         <th>등록일</th>
                         <th>삭제</th>
-                      </tr>
-                   </thead>
-                   <tbody>
-                      {currentPosts.map(post => (
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {currentPosts.map(post => (
                             <tr key={post.UserEmail}>
                             <td>{post.UserName}</td>
                             <td>{post.UserOrgan}</td>
                             <td>{post.UserAdminAuth===1?'관리자':'일반사용자'}</td>
-                            <td className="user_update"><span onClick={()=>onSelect(post.UserEmail, post.UserAdminAuth, post.UserNickName)}>{post.UserEmail}</span></td>
+                            <td className="user_update_table"><span onClick={()=>onSelect(post.UserEmail, post.UserAdminAuth, post.UserNickName)}>{post.UserEmail}</span></td>
                             <td>{post.CreateDate}</td>
                             <td>
                             <button onClick={()=>onDelete(post.UserEmail)}>삭제</button>
                             </td>
-                         </tr>
-                      ))}
-                   </tbody>
- 
+                            </tr>
+                        ))}
+                    </tbody>
+
                 </table>
-             </div>
- 
-             <Pagination postsPerPage={postsPerPage} totalPosts={posts.length} currentPage={currentPage} paginate={paginate}></Pagination>
-          </div>
-       </div>
+                </div>
+
+                <Pagination postsPerPage={postsPerPage} totalPosts={posts.length} currentPage={currentPage} paginate={paginate}></Pagination>
+            </div>
+        </div>
     )
 }
 

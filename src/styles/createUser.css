@@ -20,4 +20,68 @@ img {
     object-fit: contain;
     margin-right: 20px;
 }
-
+.create_content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+.create{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top:20px;
+}
+.create_inputFields {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    height: 500px;
+}
+.create_inputField{
+    border-bottom: 1px solid gray;
+    width: 80%;
+}
+.create_input{
+    border:none;
+    width :50%;
+}
+.create_input:focus{
+    outline: none;
+}
+.create_check{
+    border-bottom: 1px solid gray;
+    width: 100%;
+}
+.create_check_rap{
+    width: 80%;
+}
+.create_rap{
+    width: 80%;
+    margin: 0 auto;
+}
+.createTitle{
+    width: 80%;
+    display: flex;
+    justify-content: flex-start;
+    margin: 0 auto;
+}
+.create_footer{
+    width: 80%;
+    
+}
+.createBtn{
+    width: 80%;
+    display: flex;
+    justify-content: right;
+    margin:0 auto;
+}
+.create_backBtn{
+    width: 80%;
+    display: flex;
+    justify-content: flex-start;
+    margin:0 auto;
+}

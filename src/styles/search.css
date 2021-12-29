@@ -20,6 +20,7 @@
     align-items: center;
     width: 518px;
     height: 31.6px;
+    margin: 0 auto;
     
 }
 .search > input:focus{

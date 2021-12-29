@@ -1,0 +1,36 @@
+.user_update{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.update_items{
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content:space-around;
+    height: 500px;
+}
+.update_item{
+    width: 80%;
+}
+.update_check_rap{
+    width: 80%;
+    
+}
+.update_check{
+    width: 100%;
+    border-bottom: 1px solid gray;
+}
+.update_pw{
+    width:80%;
+    border-bottom: 1px solid gray;
+}
+.update_input{
+    border:none;
+    width:50%;
+}
+.update_input:focus{
+    outline: none;
+}

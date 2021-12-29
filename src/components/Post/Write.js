@@ -47,7 +47,7 @@ const Write = () => {
             board_content:document.querySelector('.note-editable').innerHTML,
             user_nickname: user.user_nickname,
             tag: tagList.join(),
-            date:moment().format('YYYYMMDD HH:mm:ss')
+            date:moment().format('YYYY-MM-DD HH:mm:ss')
         }).then(res=>alert(res.data))
         .then(setTagList([]))
         .then(dispatch(readPost(boardId)))
@@ -94,7 +94,7 @@ const Write = () => {
             <div className="title">
             <input type="text" name="title" placeholder="제목을 입력해주세요" value={title} onChange={(e)=>setTitle(e.target.value)}/>
             </div>
-            <div className="container">
+            <div className="write_container">
                 <ReactSummernote 
                 options={{
                 lang: "ko-KR",

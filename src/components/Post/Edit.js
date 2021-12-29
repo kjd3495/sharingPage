@@ -51,7 +51,7 @@ const Edit = () => {
             board_title:title,
             board_content:document.querySelector('.note-editable').innerHTML,
             tag: tag_list.join(),
-            date: moment().format('YYYYMMDD HH:mm:ss')
+            date: moment().format('YYYY-MM-DD HH:mm:ss')
         }).then(res=>alert(res.data))
         .then(navigate('/post'))
     }

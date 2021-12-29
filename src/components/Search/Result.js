@@ -77,18 +77,19 @@ const Result = () => {
             </select>
             <input type="text"className='input_search' placeholder="검색어" value={keyword} onChange={(e)=>{setKeyword(e.target.value)}} onKeyPress={Enter}/><Search onClick={useSearch}/>
             </div>
-            <div className="content">
+            <div className="result_content">
             {
-                posts.length===0? <div>검색결과없음</div>:
+                posts.length===0? <div style={{marginTop:"20px", textAlign:"center"}}><strong>검색결과없음</strong></div>:
             currentPosts.map(post => (
-                <div style={{transform:"scale(0.8)", marginLeft:"0"}} key={post.BoardId}>
-                <div><span style={{fontSize:"40px", fontWeight:"50",color:"black"}}onClick={()=>selectPost(post.BoardId)}>{post.BoardTitle}</span></div>
-                <div onClick={()=>selectPost(post.BoardId)} dangerouslySetInnerHTML={ {__html: post.BoardContent.replace(/<IMG(.*?)>/gi,'').replace(/<p(.*?)>/gi,'').slice()} }></div>
+                <div style= {{marginTop:"20px"}}key={post.BoardId}>
+                <div><span style={{fontSize:"20px", fontWeight:"50",color:"black"}}onClick={()=>selectPost(post.BoardId)}><strong>제목 : </strong><strong>{post.BoardTitle}</strong></span></div>
+                <div style={{transform:"scale(0.8)", height:"300px", overflow:"hidden"}} onClick={()=>selectPost(post.BoardId)} dangerouslySetInnerHTML={ {__html: post.BoardContent.replace(/<IMG(.*?)>/gi,'').replace(/<(\/p|p)([^>]*)>/gi,"").replace(/<(\/aside|aside)([^>]*)>/gi,"")} }></div>
                 <div style={{display:"flex", alignItems:"center"}}>{
                 post.Tag&&post.Tag.map(a=>
                 (<div style={{marginRight:"10px", backgroundColor: "yellow",
                 color:"rgb(141, 137, 137)"}} key={a}><span style={{padding:"5px"}}>{a}</span></div>))}
                 </div>
+                <hr/>
                 </div>
             )) }
             </div>

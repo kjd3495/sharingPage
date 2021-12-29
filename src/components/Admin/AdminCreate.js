@@ -1,5 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import axios from 'axios'
+import 'moment/locale/ko'
+import moment from 'moment'
 
 const AdminCreate = () => {
     const [email, setEmail] = useState('')
@@ -43,7 +45,8 @@ const AdminCreate = () => {
                 user_pw: password,
                 user_organ: organ,
                 user_name : name,
-                user_adminAuth : adminAuth            
+                user_adminAuth : adminAuth,
+                date: moment().format('YYYY-MM-DD HH:mm:ss')            
     }).then((res)=>alert(res.data))
         .catch()
         }
