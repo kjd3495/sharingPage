@@ -1,0 +1,40 @@
+.user_update{
+    width:80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.update_top{
+    width:80%;
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 20px;
+}
+.adUpdate_items{
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height : 500px;
+   
+}
+.adUpdate_item{
+    width:100%;
+    border-bottom: 1px solid gray;
+
+}
+.adUpdate_input{
+    width:50%;
+    border:none;
+}
+.adUpdate_input:focus{
+    outline: none;
+}
+.adUpdate_check_rap{
+    width:100%;
+}
+.adUpdate_check{
+    width:100%;
+    border-bottom: 1px solid gray;
+
+}

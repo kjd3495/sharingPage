@@ -51,7 +51,7 @@ const AdminMain = () => {
             <div className="top">
                 <button className='returnBtn' onClick={back}>뒤로가기</button><button className="user_create"onClick={()=>navigate('/adminCreate')}>추가하기</button>
             </div>
-                <div style={{ padding: "0 12px" }}>
+                <div style={{ padding: "0 12px", marginTop:'20px' }}>
                 <table  align='center'width='800' height="300" className="board_list text-center">
                     <colgroup>
                         <col width="100" />

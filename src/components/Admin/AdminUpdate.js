@@ -3,6 +3,7 @@ import React,{useEffect, useState} from 'react'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router'
 import { selectedUser } from '../../features/selectSlice'
+import '../../styles/adUpdate.css'
 const AdminUpdate = () => {
     const navigate = useNavigate();
     const selecteduser = useSelector(selectedUser);
@@ -86,22 +87,22 @@ const AdminUpdate = () => {
     return (
         <div className="user_update">
                 <div className="update_top">
-                    <button onClick={goBack}>뒤로가기</button><button type="submit" onClick={onUpdate} className="updateUser_btn">수정완료</button>
+                    <button onClick={goBack}>뒤로가기</button><button style={{marginLeft:"5px"}} type="submit" onClick={onUpdate} className="updateUser_btn">수정완료</button>
                 </div>
             <div className="adUpdate_items">
-            <div className="adUpdate_item">
-                <strong>권한: </strong>
+            <div className="adUpdate_auth">
+                <strong>권한 : </strong>
                 <select name="adminAuth" defaultValue={selecteduser.user_adminAuth}
                     onChange={(e)=>setAdminAuth(e.target.value)}>
                     <option value={0}>일반사용자</option>
                     <option value={1}>관리자</option>
                     </select></div>
-            <div className="adUpdate_item"><strong>이메일 : </strong>{selecteduser.user_email}</div>
-                <div className="adUpdate_item"><strong>비밀번호</strong><br/><input type="password" name="user_pw" id="password" placeholder="비밀번호를 입력해 주세요." value={password} onChange={(e)=>{setPassword(e.target.value)}}/></div>
-                <div className="adUpdate_item"><strong>비밀번호확인</strong><br/><input type="password" id="passwordCheck" placeholder="비밀번호를 다시 입력해 주세요." value={passwordCheck} onChange={(e)=>{setPasswordCheck(e.target.value)}}/><span style={pwMessage==='비밀번호가 일치합니다'?{color:'green'}:{color:'red'}}>{pwMessage}</span></div>
-                <div className="adUpdate_item"><strong>이름</strong><br/><input type="name" name="user_name"id="name" placeholder="이름을 입력해 주세요." value={name} onChange={(e)=>{setName(e.target.value)}}/></div>
-                <div className="adUpdate_item"><strong>조직</strong><br/><input type="organ"name="user_organ" id="organ" placeholder="조직을 입력해 주세요." value={organ} onChange={(e)=>{setOrgan(e.target.value)}}/></div>
-                <div className="adUpdate_item"><strong>닉네임</strong><br/><input type="nickname"name="user_nickname" id="nickname" placeholder="닉네임을 입력해 주세요." value={nickname} onChange={(e)=>{setNickname(e.target.value); setPassNick(false)}}/></div><button type="submit" onClick={selecteduser.user_nickname===nickname ?()=>alert('현재 닉네임입니다'):nicknameCheck} className="nicknameCheck_btn">중복확인</button>
+            <div className="adUpdate_email"><strong>이메일 : </strong>{selecteduser.user_email}</div>
+                <div className="adUpdate_item"><strong>비밀번호</strong><br/><input className="adUpdate_input" type="password" name="user_pw" id="password" placeholder="비밀번호를 입력해 주세요." value={password} onChange={(e)=>{setPassword(e.target.value)}}/></div>
+                <div className='adupdate_check_rap'><div className="adUpdate_check"><strong>비밀번호확인</strong><br/><input className="adUpdate_input" type="password" id="passwordCheck" placeholder="비밀번호를 다시 입력해 주세요." value={passwordCheck} onChange={(e)=>{setPasswordCheck(e.target.value)}}/></div><span style={pwMessage==='비밀번호가 일치합니다'?{color:'green'}:{color:'red'}}>{pwMessage}</span></div>
+                <div className="adUpdate_item"><strong>이름</strong><br/><input className="adUpdate_input" type="name" name="user_name"id="name" placeholder="이름을 입력해 주세요." value={name} onChange={(e)=>{setName(e.target.value)}}/></div>
+                <div className="adUpdate_item"><strong>조직</strong><br/><input className="adUpdate_input" type="organ"name="user_organ" id="organ" placeholder="조직을 입력해 주세요." value={organ} onChange={(e)=>{setOrgan(e.target.value)}}/></div>
+                <div className='adupdate_check_rap'><div className="adUpdate_check"><strong>닉네임</strong><br/><input className="adUpdate_input" type="nickname"name="user_nickname" id="nickname" placeholder="닉네임을 입력해 주세요." value={nickname} onChange={(e)=>{setNickname(e.target.value); setPassNick(false)}}/></div><br/><button type="submit" onClick={selecteduser.user_nickname===nickname ?()=>alert('현재 닉네임입니다'):nicknameCheck} className="nicknameCheck_btn">중복확인</button></div>
             </div>
         </div>
     )

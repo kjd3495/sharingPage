@@ -2,7 +2,8 @@ import React, {useState, useEffect} from 'react'
 import axios from 'axios'
 import 'moment/locale/ko'
 import moment from 'moment'
-
+import '../../styles/adminCreate.css'
+import { useNavigate } from 'react-router-dom'
 const AdminCreate = () => {
     const [email, setEmail] = useState('')
     const [nickname, setNickname] = useState('')
@@ -16,7 +17,7 @@ const AdminCreate = () => {
     const [truePassword, setTruePassword] = useState(false)
     const [passwordCheck, setPasswordCheck] = useState('')
     const [pwMessage, setPwMeassage] = useState('비밀번호가 일치하지 않습니다')
-
+    const navigate = useNavigate();
     useEffect(()=>{
         setTrueEmail(isEmail(email))
         setTruePassword(isPassword(password))
@@ -81,31 +82,35 @@ const AdminCreate = () => {
         .then(setPassNick(true))
         .catch()
     }}
-
+    const useBack= ()=>{
+        navigate(-1)
+    }
     return (
-        <div>
+        <div className="adminCreate_content">
         <div className="adminCreate_top">
+                    <button onClick={useBack}>뒤로가기</button>
                     <button type="submit" onClick={onCreate} className="createUser_btn">등록하기</button>
                 </div>
-        <div className="content">
+        
             <div className="adminCreate">
                 <div className="adminCreate_inputFields">
-                <div className="adminCreate_inputField">
+                <div className="adminCreate_auth">
+                <strong style={{marginRight:'5px'}}>권한 :</strong>
                     <select name="adminAuth" defaultValue={0}
                     onChange={(e)=>setAdminAuth(e.target.value)}>
                     <option value={0}>일반사용자</option>
                     <option value={1}>관리자</option>
                     </select></div>
-                <div className="adminCreate_inputField"><input type="email" name="user_email" id="email" placeholder="이메일을 입력해 주세요" value={email} onChange={(e)=>{setEmail(e.target.value)}}/></div><button type="submit" onClick={emailCheck} className="emailCheck_btn">중복확인</button>
-                <div className="adminCreate_inputField"><input type="password" name="user_pw" id="password" placeholder="비밀번호를 입력해 주세요." value={password} onChange={(e)=>{setPassword(e.target.value)}}/></div>
-                <div className="adminCreate_inputField"><input type="password" id="passwordCheck" placeholder="비밀번호를 다시 입력해 주세요." value={passwordCheck} onChange={(e)=>{setPasswordCheck(e.target.value)}}/><span style={pwMessage==='비밀번호가 일치합니다'?{color:'green'}:{color:'red'}}>{pwMessage}</span></div>
-                <div className="adminCreate_inputField"><input type="name" name="user_name"id="name" placeholder="이름을 입력해 주세요." value={name} onChange={(e)=>{setName(e.target.value)}}/></div>
-                <div className="adminCreate_inputField"><input type="organ"name="user_organ" id="organ" placeholder="조직을 입력해 주세요." value={organ} onChange={(e)=>{setOrgan(e.target.value)}}/></div>
-                <div className="adminCreate_inputField"><input type="nickname"name="user_nickname" id="nickname" placeholder="닉네임을 입력해 주세요." value={nickname} onChange={(e)=>{setNickname(e.target.value)}}/></div><button type="submit" onClick={nicknameCheck} className="nicknameCheck_btn">중복확인</button>
+                <div className="adminCreate_check_rap"><strong>이메일</strong><br/><div className='adminCreate_check'><input className='adminCreate_input' type="email" name="user_email" id="email" placeholder="이메일을 입력해 주세요" value={email} onChange={(e)=>{setEmail(e.target.value)}}/></div><br/><button type="submit" onClick={emailCheck} className="emailCheck_btn">중복확인</button></div>
+                <div className="adminCreate_inputField"><strong>비밀번호</strong><br/><input className='adminCreate_input' type="password" name="user_pw" id="password" placeholder="비밀번호를 입력해 주세요." value={password} onChange={(e)=>{setPassword(e.target.value)}}/></div>
+                <div className='adminCreate_check_rap'><strong>비밀번호 확인</strong><br/><div className="adminCreate_check"><input className='adminCreate_input' type="password" id="passwordCheck" placeholder="비밀번호를 다시 입력해 주세요." value={passwordCheck} onChange={(e)=>{setPasswordCheck(e.target.value)}}/></div><span style={pwMessage==='비밀번호가 일치합니다'?{color:'green'}:{color:'red'}}>{pwMessage}</span></div>
+                <div className="adminCreate_inputField"><strong>이름</strong><br/><input className='adminCreate_input' type="name" name="user_name"id="name" placeholder="이름을 입력해 주세요." value={name} onChange={(e)=>{setName(e.target.value)}}/></div>
+                <div className="adminCreate_inputField"><strong>조직</strong><br/><input className='adminCreate_input' type="organ"name="user_organ" id="organ" placeholder="조직을 입력해 주세요." value={organ} onChange={(e)=>{setOrgan(e.target.value)}}/></div>
+                <div className='adminCreate_check_rap'><strong>닉네임</strong><br/><div className="adminCreate_check"><input className='adminCreate_input' type="nickname"name="user_nickname" id="nickname" placeholder="닉네임을 입력해 주세요." value={nickname} onChange={(e)=>{setNickname(e.target.value)}}/></div><br/><button type="submit" onClick={nicknameCheck} className="nicknameCheck_btn">중복확인</button></div>
                 
                 </div>
             </div>
-        </div>
+        
         </div>
     )
 }

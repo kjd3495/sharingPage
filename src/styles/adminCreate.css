@@ -1,0 +1,50 @@
+.adminCreate_content{
+    width:100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.adminCreate{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80%;
+}
+.adminCreate_top{
+    display: flex;
+    justify-content: flex-start;
+    width: 80%;
+}
+.adminCreate_inputFields{
+    width:100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top:20px;
+    justify-content: space-around;
+    height: 500px;
+}
+.adminCreate_auth{
+    display: flex;
+    width: 80%;
+    justify-content: flex-start;
+
+}
+.adminCreate_inputField {
+    width:80%;
+    border-bottom: 1px solid gray;
+}
+.adminCreate_input{
+    border: none;
+    width:50%;
+}
+.adminCreate_input:focus{
+    outline: none;
+}
+.adminCreate_check_rap{
+    width:80%;
+}
+.adminCreate_check {
+    width:100%;
+    border-bottom: 1px solid gray;
+}
